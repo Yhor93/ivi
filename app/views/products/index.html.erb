@@ -1,0 +1,76 @@
+<div style="display: flex; gap: 1rem;">
+
+    <!-- ====== SIDEBAR IZQUIERDA ====== -->
+    <aside style="width: 250px; border: 1px solid #ccc; padding: 1rem;">
+
+        <!-- Filtro Buscar -->
+        <h3>Buscar</h3>
+        <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" } do |f| %>
+        <%= f.text_field :query_text, value: params[:query_text], placeholder: "Buscar...", onchange: 'this.form.submit()' %>
+        <%= hidden_field_tag :category_id, params[:category_id] %>
+        <%= hidden_field_tag :min_price, params[:min_price] %>
+        <%= hidden_field_tag :max_price, params[:max_price] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <% end %>
+
+        <!-- Filtro Ordenar Por -->
+        <h3>Filtros</h3>
+        <ul class="sorting-options">
+            <li><%= link_to "Título (A–Z)", products_path(request.query_parameters.merge(sort: "title_asc")), data: { turbo_frame: "products_frame" } %></li>
+            <li><%= link_to "Título (Z–A)", products_path(request.query_parameters.merge(sort: "title_desc")), data: { turbo_frame: "products_frame" } %></li>
+            <li><%= link_to "Precio (menor a mayor)", products_path(request.query_parameters.merge(sort: "price_asc")), data: { turbo_frame: "products_frame" } %></li>
+            <li><%= link_to "Precio (mayor a menor)", products_path(request.query_parameters.merge(sort: "price_desc")), data: { turbo_frame: "products_frame" } %></li>
+            <li><%= link_to "Más recientes", products_path(request.query_parameters.merge(sort: "newest")), data: { turbo_frame: "products_frame" } %></li>
+            <li><%= link_to "Más antiguos", products_path(request.query_parameters.merge(sort: "oldest")), data: { turbo_frame: "products_frame" } %></li>
+        </ul>
+
+        <!-- Filtro Precio -->
+        <h3>Precio</h3>
+        <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" } do %>
+        <%= number_field_tag :min_price, params[:min_price], placeholder: "Mínimo", style: "width: 80px;", onchange: "this.form.submit()" %>
+        <%= number_field_tag :max_price, params[:max_price], placeholder: "Máximo", style: "width: 80px;", onchange: "this.form.submit()" %>
+        <%= hidden_field_tag :query_text, params[:query_text] %>
+        <%= hidden_field_tag :category_id, params[:category_id] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <% end %>
+
+        <!-- Filtro Categoría -->
+        <h3>Categorías</h3>
+        <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" }, style: "display: flex; align-items: center; gap: .5rem;" do %>
+        <label for="category_id">Categoría:</label>
+        <%= select_tag :category_id,
+        options_from_collection_for_select(@categories, :id, :name, params[:category_id]),
+        include_blank: "Todas",
+        onchange: "this.form.submit()" %>
+        <%= hidden_field_tag :query_text, params[:query_text] %>
+        <%= hidden_field_tag :min_price, params[:min_price] %>
+        <%= hidden_field_tag :max_price, params[:max_price] %>
+        <%= hidden_field_tag :sort, params[:sort] %>
+        <% end %>
+
+    </aside>
+
+    <!-- ====== CONTENIDO DERECHA ====== -->
+    <main style="flex: 1; border: 1px solid #ccc; padding: 1rem; height: 450px; overflow-y: auto;">
+        <%= turbo_frame_tag "products_frame" do %>
+        <% if @products.any? %>
+        <table>
+            <thead>
+                <tr>
+                    <th><%= t('products.index.headers.photo') %></th>
+                    <th><%= t('products.index.headers.title') %></th>
+                    <th><%= t('products.index.headers.description') %></th>
+                    <th><%= t('products.index.headers.price') %></th>
+                </tr>
+            </thead>
+            <tbody>
+                <%= render @products %>
+            </tbody>
+        </table>
+        <% end %>
+        <% end %>
+    </main>
+
+
+
+</div>

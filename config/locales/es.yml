@@ -1,0 +1,85 @@
+es:
+  products:
+    index:
+      add: "Añadir producto"
+      title: "Lista de Productos"
+      all: "Todos"
+      filter: "Filtrar por categoría"
+      filter_button: "Filtrar"
+      min_price: "Precio mínimo"
+      max_price: "Precio máximo"
+      search: "Buscar"
+      search_placeholder: "Buscar productos..."
+      apply_filter: "Aplicar filtro"
+      new_product: "Nuevo Producto"
+      no_products: "No hay productos aún."
+      headers:
+        photo: "Foto"
+        title: "Título"
+        description: "Descripción"
+        price: "Precio"
+        actions: "Acciones"
+      confirm_destroy: "¿Seguro que deseas eliminar este producto?"
+      no_photo: "Sin foto"
+    show:
+      back: "Volver a la lista"
+      confirm_destroy: "¿Seguro que deseas eliminar este producto?"
+    new:
+      title: "Crear Producto"
+      save: "Guardar"
+      back: "Volver a la lista de productos"
+    edit:
+      title: "Editar Producto"
+      save: "Guardar Cambios"
+      back: "Atras"
+    actions:
+      show: "Ver"
+      edit: "Editar"
+      destroy: "Eliminar"
+    form:
+      title: "Título"
+      description: "Descripción"
+      price: "Precio"
+      photo: "Foto"
+      category: "Categoría"
+      select_category: "Selecciona una categoría"
+
+  common:
+    back_to_categories: "Volver a categorías"
+    back_to_products: "Volver a productos"
+    edit: "Editar"
+    destroy: "Eliminar"
+    confirm: "¿Estás seguro?"
+    save: "Guardar"
+    save_changes: "Guardar Cambios"
+    errors_title:
+      one: "1 error impidió que esta categoría se guardara:"
+      other: "%{count} errores impidieron que esta categoría se guardara:"
+
+  categories:
+    index:
+      title: "Lista de Categorías"
+      new_category: "Nueva Categoría"
+      no_categories: "No hay categorías aún."
+    new:
+      title: "Nueva Categoría"
+    edit:
+      title: "Editar Categoría"
+    category:
+      name: "Nombre"
+    notices:
+      created: "Categoría creada con éxito."
+      updated: "Categoría actualizada con éxito."
+      destroyed: "Categoría eliminada con éxito."
+
+  activerecord:
+    errors:
+      models:
+        product:
+          attributes:
+            title:
+              blank: "no puede estar vacío"
+            price:
+              greater_than: "debe ser mayor que %{count}"
+      messages:
+      prohibited_to_save: "%{count} errores prohibieron guardar este producto"

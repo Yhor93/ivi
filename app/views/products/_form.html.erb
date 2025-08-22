@@ -1,0 +1,50 @@
+<%= form_with model: product, local: true do |form| %>
+
+<!-- Mensajes de error -->
+<% if product.errors.any? %>
+<div class="errors" style="color: red;">
+    <h2><%= t('activerecord.errors.messages.prohibited_to_save', count: product.errors.count) %></h2>
+    <ul>
+        <% product.errors.full_messages.each do |error| %>
+        <li><%= error %></li>
+        <% end %>
+    </ul>
+</div>
+<% end %>
+
+<!-- Sección: Datos básicos -->
+<div class="field">
+    <%= form.label :title, t("products.form.title") %>
+    <%= form.text_field :title %>
+</div>
+
+<div class="field">
+    <%= form.label :description, t("products.form.description") %>
+    <%= form.text_area :description %>
+</div>
+
+<!-- Sección: Información de venta -->
+<div class="field">
+    <%= form.label :price, t("products.form.price") %>
+    <%= form.number_field :price, step: 0.01 %>
+</div>
+
+<!-- Sección: Categoría -->
+<div>
+    <%= form.label :category_id, t('products.form.category') %>
+    <%= form.collection_select :category_id, Category.all.order(name: :asc), :id, :name, prompt: "Selecciona una categoría" %>
+</div>
+
+<!-- Sección: Photo -->
+<div class="field">
+    <%= form.label :photo, t("products.form.photo") %>
+    <%= form.file_field :photo, direct_upload: true %>
+</div>
+
+<!-- Botón de guardado edit y new-->
+<div class="actions">
+    <%= form.submit product.new_record? ? t("products.new.save") : t("products.edit.save") %>
+</div>
+
+
+<% end %>

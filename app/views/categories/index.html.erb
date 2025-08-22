@@ -1,0 +1,7 @@
+<% content_for :title, t('categories.index.title') %>
+
+<h1><%= t('categories.index.title') %></h1>
+
+<%= render @categories %>
+
+<%= link_to t('categories.index.new_category'), new_category_path %>

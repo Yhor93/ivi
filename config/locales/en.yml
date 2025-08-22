@@ -1,0 +1,85 @@
+en:
+  products:
+    index:
+      add: "Add Product"
+      title: "Product List"
+      all: "All"
+      filter: "Filter by category"
+      filter_button: "Filter"
+      min_price: "Minimum Price"
+      max_price: "Maximum Price"
+      search: "Search"
+      search_placeholder: "Search products..."
+      apply_filter: "Apply Filter"
+      new_product: "New Product"
+      no_products: "No products yet."
+      headers:
+        photo: "Photo"
+        title: "Title"
+        description: "Description"
+        price: "Price"
+        actions: "Actions"
+      confirm_destroy: "Are you sure you want to delete this product?"
+      no_photo: "No photo"
+    show:
+      back: "Back to list"
+      confirm_destroy: "Are you sure you want to delete this product?"
+    new:
+      title: "Create Product"
+      save: "Save"
+      back: "Back to product list"
+    edit:
+      title: "Edit Product"
+      save: "Save Changes"
+      back: "Back"
+    actions:
+      show: "View"
+      edit: "Edit"
+      destroy: "Delete"
+    form:
+      title: "Title"
+      description: "Description"
+      price: "Price"
+      photo: "Photo"
+      category: "Category"
+      select_category: "Select a category"
+
+  common:
+    back_to_categories: "Back to categories"
+    back_to_products: "Back to products"
+    edit: "Edit"
+    destroy: "Delete"
+    confirm: "Are you sure?"
+    save: "Save"
+    save_changes: "Save changes"
+    errors_title:
+      one: "1 error prohibited this category from being saved:"
+      other: "%{count} errors prohibited this category from being saved:"
+
+  categories:
+    index:
+      title: "Categories list"
+      new_category: "New Category"
+      no_categories: "No categories yet."
+    new:
+      title: "New Category"
+    edit:
+      title: "Edit Category"
+    category:
+      name: "Name"
+    notices:
+      created: "Category was successfully created."
+      updated: "Category was successfully updated."
+      destroyed: "Category was successfully deleted."
+
+  activerecord:
+    errors:
+      models:
+        product:
+          attributes:
+            title:
+              blank: "can't be blank"
+            price:
+              greater_than: "must be greater than %{count}"
+      messages:
+        prohibited_to_save: "%{count} errors prevented this product from being saved"
