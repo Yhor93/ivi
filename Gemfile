@@ -67,3 +67,5 @@ group :test do
 end
 
 gem "rubocop", "~> 1.79", require: false
+
+gem "tailwindcss-rails", "~> 4.3"
