@@ -1,6 +1,6 @@
 # README
 
-# 🛒 Ivi – Marketplace Rails
+# 🛒 Ivi – Marketplace
 
 Un **Marketplace** construido con [Ruby on Rails 8](https://rubyonrails.org/).  
 Permite a los usuarios registrarse, iniciar sesión, explorar productos y comenzar su experiencia de compra. 🚀
