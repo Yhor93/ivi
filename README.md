@@ -1,24 +1,29 @@
 # README
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+# 🛒 Ivi – Marketplace Rails
 
-Things you may want to cover:
+Un **Marketplace** construido con [Ruby on Rails 8](https://rubyonrails.org/).  
+Permite a los usuarios registrarse, iniciar sesión, explorar productos y comenzar su experiencia de compra. 🚀
 
-* Ruby version
+---
 
-* System dependencies
+## ✨ Características
 
-* Configuration
+- 🔑 **Autenticación segura** (login/logout con sesiones Rails).
+- 👤 **Gestión de usuarios** con `CurrentAttributes`.
+- 📦 **Productos listados** en grid responsivo.
+- 🛍️ **Flujo de compra básico** (botón "Comprar" que requiere login).
+- 🌙 **Soporte de i18n** (multi-idioma listo para escalar).
+- ⚡ **Rails 8.0.2.1** con parches de seguridad aplicados.
+- 💾 **Persistencia** con PostgreSQL.
 
-* Database creation
+---
 
-* Database initialization
+## 🚀 Instalación local
 
-* How to run the test suite
+### 1. Clonar el repo
+```bash
+git clone https://github.com/Yhor93/ivi.git
+cd ivi
 
-* Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...
+Desarrollado con 💙 por  Yhor93
