@@ -1,4 +1,9 @@
 es:
+  app:
+    name: "IvI"
+    meta_title: "Compra y vende tus productos favoritos"
+    description: "Plataforma para comprar y vender en línea"
+    footer: "Todos los derechos reservados © IvI"
   products:
     index:
       add: "Añadir producto"
@@ -82,4 +87,44 @@ es:
             price:
               greater_than: "debe ser mayor que %{count}"
       messages:
-      prohibited_to_save: "%{count} errores prohibieron guardar este producto"
+        prohibited_to_save: "%{count} errores prohibieron guardar este producto"
+
+    attributes:
+      user:
+        name: "Nombre"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar contraseña"
+
+  authentication:
+    users:
+      new:
+        title: "Registro de Usuario"
+        submit: "Crear cuenta"
+        back: "Volver a productos"
+      form:
+        name: "Nombre de usuario"
+        email: "Correo electrónico"
+        password: "Contraseña"
+        password_confirmation: "Confirmar Contraseña"
+      notices:
+        created: "Usuario creado con éxito."
+      errors_title:
+        one: "1 error impidió que este usuario se guardara:"
+        other: "%{count} errores impidieron que este usuario se guardara:"
+
+    sessions:
+      new:
+        title: "Iniciar Sesión"
+        submit: "Iniciar Sesión"
+        back: "Volver a productos"
+      form:
+        login: "Nombre o correo electrónico"
+        password: "Contraseña"
+      notices:
+        welcome: "¡Bienvenido de nuevo, %{name}!"
+        created: "Sesión iniciada correctamente."
+        destroyed: "Sesión cerrada exitosamente."
+      errors_title:
+        invalid_credentials: "Credenciales Incorrectas."
+

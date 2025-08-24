@@ -1,4 +1,8 @@
 en:
+  app_name: "IvI"
+  meta_title: "Buy and sell your favorite products"
+  description: "Platform to buy and sell online"
+  footer: "All rights reserved © IvI"
   products:
     index:
       add: "Add Product"
@@ -83,3 +87,47 @@ en:
               greater_than: "must be greater than %{count}"
       messages:
         prohibited_to_save: "%{count} errors prevented this product from being saved"
+
+    attributes:
+      product:
+        title: "Title"
+        description: "Description"
+        price: "Price"
+        photo: "Photo"
+        category: "Category"
+      category:
+        name: "Name"
+      
+  authentication:
+    users:
+      new:
+        title: "Sign Up"
+        submit: "Create Account"
+        back: "Back to products"
+      form:
+        name: "Username"
+        email: "Email"
+        password: "Password"
+        password_confirmation: "Confirm Password"
+      notices:
+        created: "Account created successfully."
+      errors_title:
+        one: "1 error prevented this user from being saved:"
+        other: "%{count} errors prevented this user from being saved:"
+
+    sessions:
+      new:
+        title: "Log In"
+        submit: "Log In"
+        back: "Back to products"
+      form:
+        login: "Email or Name"
+        password: "Password"
+      notices:
+        welcome: "Welcome back, %{name}!"
+        created: "Logged in successfully."
+        destroyed: "Logged out successfully."
+      errors_title:
+        invalid_credentials: "Invalid Credentials."
+
+    

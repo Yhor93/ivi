@@ -11,8 +11,7 @@
                     <!-- Filtro Buscar -->
                     <h3 class="text-lg font-semibold">Buscar</h3>
                     <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" }, class: "flex gap-2 hover:bg-blue-100 hover:rounded-md transition duration-200" do |f| %>
-                    <%= f.text_field :query_text, value: params[:query_text], placeholder: "Buscar...", onchange: 'this.form.submit()',
-            class: "border border-gray-300 rounded focus:ring focus:ring-blue-200" %>
+                    <%= f.text_field :query_text, value: params[:query_text], placeholder: "Buscar...", onchange: 'this.form.submit()',class: "border border-gray-300 rounded focus:ring focus:ring-blue-200" %>
                     <%= hidden_field_tag :category_id, params[:category_id] %>
                     <%= hidden_field_tag :min_price, params[:min_price] %>
                     <%= hidden_field_tag :max_price, params[:max_price] %>
@@ -68,7 +67,7 @@
                 <%= turbo_frame_tag "products_frame" do %>
                 <% if @products.any? %>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <%= render @products %>
+                    <%= render @products %> 
                 </div>
                 <% end %>
                 <% end %>

@@ -1,0 +1,32 @@
+<div class="min-h-screen flex items-center justify-center bg-gray-300">
+    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
+
+        <h1 class="mb-6 text-2xl font-bold text-center text-gray-800">
+            <%= t('authentication.sessions.new.title') %>
+        </h1>
+
+        <%= form_with url: sessions_path, local: true do |f| %>
+        <% if flash[:alert] %>
+        <div style="color: red;">
+            <p><%= flash[:alert] %></p>
+        </div>
+        <% end %>
+
+        <div>
+            <%= f.label :login, t('authentication.sessions.form.login'), class: "text-md font-medium " %><br>
+            <%= f.text_field :login, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200"%>
+        </div>
+
+        <div>
+            <%= f.label :password, t('authentication.sessions.form.password'), class: "text-md font-medium " %><br>
+            <%= f.password_field :password, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
+        </div>
+
+        <div class="flex justify-between mt-4">
+            <%= f.submit t('authentication.sessions.new.submit'), class: "bg-green-600 text-white px-4 py-2 rounded cursor-pointer" %>
+
+            <%= link_to t('authentication.sessions.new.back_to_signup'), new_user_path, class: "text-green-600 underline px-4 py-2" %>
+        </div>
+        <% end %>
+    </div>
+</div>

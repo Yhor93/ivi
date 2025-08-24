@@ -4,7 +4,7 @@ class ProductsController < ApplicationController
   # GET /products
   def index
     @categories = Category.order(name: :asc).load_async
-    @products = FindProducts.new.call(params).load_async
+    @products = FindProducts.new.call(product_params_index).load_async
   end
 
   # GET /products/:id
@@ -49,5 +49,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params.require(:product).permit(:title, :price, :description, :photo, :category_id)
+  end
+
+  def product_params_index
+    params.permit(:category_id, :min_price, :max_price, :query_text, :sort)
   end
 end
