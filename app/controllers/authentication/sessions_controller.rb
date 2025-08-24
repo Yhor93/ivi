@@ -1,4 +1,5 @@
 class Authentication::SessionsController < ApplicationController
+  skip_before_action :protect_pages, only: %i[new create]
   def new
     # formulario de login
   end

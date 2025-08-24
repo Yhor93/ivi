@@ -127,4 +127,5 @@ es:
         destroyed: "Sesión cerrada exitosamente."
       errors_title:
         invalid_credentials: "Credenciales Incorrectas."
+        must_be_logged_in: "Debes iniciar sesión para acceder a esta página."
 

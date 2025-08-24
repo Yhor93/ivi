@@ -129,5 +129,6 @@ en:
         destroyed: "Logged out successfully."
       errors_title:
         invalid_credentials: "Invalid Credentials."
+        must_be_logged_in: "You must be logged in to access this page."
 
     
