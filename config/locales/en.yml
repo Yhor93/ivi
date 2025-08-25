@@ -26,6 +26,7 @@ en:
       confirm_destroy: "Are you sure you want to delete this product?"
       no_photo: "No photo"
     show:
+      view_more_products: "View more products from %{username}"
       back: "Back to list"
       confirm_destroy: "Are you sure you want to delete this product?"
     new:
@@ -56,6 +57,7 @@ en:
     confirm: "Are you sure?"
     save: "Save"
     save_changes: "Save changes"
+    not_found: "Could not be found"
     errors_title:
       one: "1 error prohibited this category from being saved:"
       other: "%{count} errors prohibited this category from being saved:"
@@ -105,7 +107,7 @@ en:
         submit: "Create Account"
         back: "Back to products"
       form:
-        name: "Username"
+        username: "Username"
         email: "Email"
         password: "Password"
         password_confirmation: "Confirm Password"
@@ -119,18 +121,20 @@ en:
       new:
         title: "Log In"
         submit: "Log In"
-        back: "Back to products"
+        back_to_signup: "Sign Up"
       form:
         login: "Email or Name"
         password: "Password"
       notices:
-        welcome: "Welcome back, %{name}!"
+        welcome: "Welcome back, %{username}!"
         created: "Logged in successfully."
         confirm: "Are you sure you want to log out?"
         destroyed: "Logged out successfully."
       errors_title:
         invalid_credentials: "Invalid Credentials."
         must_be_logged_in: "You must be logged in to access this page."
+      errors_messages:
+        invalid_credentials: "Invalid email/name or password."
 
     navegation:
       login: "Log In"

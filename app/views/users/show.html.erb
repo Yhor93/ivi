@@ -1,2 +1,40 @@
-<%= @user.name %>
+<div class="max-w-4xl mx-auto mt-8">
 
+    <!-- Info del usuario -->
+    <div class="bg-white p-6 rounded-lg shadow mb-6 flex items-center">
+        <div>
+            <h2 class="text-2xl font-bold"><%= @user.username %></h2>
+            <p class="text-gray-600"><strong>Nombre:</strong> <%= @user.name %></p>
+            <p class="text-gray-600"><strong>Correo:</strong> <%= @user.email %></p>
+        </div>
+    </div>
+
+    <!-- Mis productos -->
+    <h3 class="text-xl font-semibold mb-4">Mis productos</h3>
+
+    <% if @user.products.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <% @user.products.each do |product| %>
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h4 class="font-bold text-lg"><%= product.title %></h4>
+            <p class="text-gray-600"><%= number_to_currency(product.price) %></p>
+
+            <%# Si hay imagen %>
+            <% if product.photo.attached? %>
+            <%= image_tag product.photo, class: "w-full h-48 object-cover rounded my-2" %>
+            <% end %>
+
+            <% if Current.user&.admin? || product.owner? %>
+            <div class="mt-2 flex gap-2">
+                <%= link_to "Editar", edit_product_path(product), class: "text-blue-600" %>
+                <%= link_to "Eliminar", product, method: :delete, data: { confirm: "¿Seguro?" }, class: "text-red-600" %>
+            </div>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
+    <% else %>
+    <p class="text-gray-500">Este usuario no ha creado productos aún.</p>
+    <% end %>
+
+</div>

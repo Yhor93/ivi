@@ -15,8 +15,13 @@ class User < ApplicationRecord
   # Validaciones
   validates :name,
             presence: true,
-            length: { in: 3..10 },
-            format: { with: VALID_NAME_REGEX, message: "solo puede contener letras y números" }
+            length: { maximum: 20 }
+
+  validates :username,
+            presence: true,
+            length: { in: 3..15 },
+            format: { with: VALID_NAME_REGEX, message: "solo puede contener letras y números" },
+            uniqueness: { case_sensitive: false, message: "ya está en uso" }
 
   validates :email,
             presence: true,

@@ -23,6 +23,7 @@
                     } %>
 </div>
 <% end %>
+<%= link_to t('.view_more_products', username: @product.user.username), user_path(@product.user.username) %>
 <div class="mt-4">
     <%= link_to t('products.show.back'), products_path %>
 </div>

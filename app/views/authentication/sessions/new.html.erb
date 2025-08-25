@@ -13,12 +13,12 @@
         <% end %>
 
         <div>
-            <%= f.label :login, t('authentication.sessions.form.login'), class: "text-md font-medium " %><br>
-            <%= f.text_field :login, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200"%>
+            <%= f.label :login, t('authentication.sessions.form.login'), class: "text-md font-medium" %><br>
+            <%= f.text_field :login, required: true, autofocus: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
         </div>
 
         <div>
-            <%= f.label :password, t('authentication.sessions.form.password'), class: "text-md font-medium " %><br>
+            <%= f.label :password, t('authentication.sessions.form.password'), class: "text-md font-medium" %><br>
             <%= f.password_field :password, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
         </div>
 

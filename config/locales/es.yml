@@ -27,6 +27,7 @@ es:
       confirm_destroy: "¿Seguro que deseas eliminar este producto?"
       no_photo: "Sin foto"
     show:
+      view_more_products: "Ver más productos de %{username}"
       back: "Volver a la lista"
       confirm_destroy: "¿Seguro que deseas eliminar este producto?"
     new:
@@ -57,6 +58,7 @@ es:
     confirm: "¿Estás seguro?"
     save: "Guardar"
     save_changes: "Guardar Cambios"
+    not_found: "No se pudo encontrar"
     errors_title:
       one: "1 error impidió que esta categoría se guardara:"
       other: "%{count} errores impidieron que esta categoría se guardara:"
@@ -103,7 +105,7 @@ es:
         submit: "Crear cuenta"
         back: "Volver a productos"
       form:
-        name: "Nombre de usuario"
+        username: "Nombre de usuario"
         email: "Correo electrónico"
         password: "Contraseña"
         password_confirmation: "Confirmar Contraseña"
@@ -112,17 +114,21 @@ es:
       errors_title:
         one: "1 error impidió que este usuario se guardara:"
         other: "%{count} errores impidieron que este usuario se guardara:"
+      errors_messages:
+        username_taken: "Nombre de usuario ya está en uso"
+        email_taken: "Correo electrónico ya está en uso"
+
 
     sessions:
       new:
         title: "Iniciar Sesión"
         submit: "Iniciar Sesión"
-        back: "Volver a productos"
+        back_to_signup: "Registrarse"
       form:
-        login: "Nombre o correo electrónico"
+        login: "Usuario o correo electrónico"
         password: "Contraseña"
       notices:
-        welcome: "¡Bienvenido de nuevo, %{name}!"
+        welcome: "¡Bienvenido de nuevo, %{username}!"
         created: "Sesión iniciada correctamente."
         confirm: "¿Seguro que deseas cerrar sesión?"
         destroyed: "Sesión cerrada exitosamente."
