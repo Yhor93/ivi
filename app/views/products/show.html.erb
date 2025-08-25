@@ -1,8 +1,7 @@
 <h1><%= @product.title %></h1>
 
-<% if @product.photo.attached? %>
-<%= image_tag @product.photo, style: "max-width: 400px; height: 150;" %>
-<% end %>
+<%= image_tag @product.photo.variant(resize_to_limit: [400, 150]) if @product.photo.attached? %>
+
 
 <p><strong><%= t('products.form.description') %></strong></p>
 <p><%= @product.description %></p>
@@ -10,7 +9,20 @@
 <p><strong><%= t('products.form.price') %></strong> <%= number_to_currency(@product.price, unit: "$") %></p>
 <p><strong><%= t('products.form.category') %>:</strong> <%= @product.category&.name %></p>
 
-<%= link_to t('products.actions.edit'), edit_product_path(@product) %> |
-<%= link_to t('products.actions.destroy'), @product, 
-            data: { turbo_method: :delete, turbo_confirm: t('products.show.confirm_destroy') } %> |
-<%= link_to t('products.show.back'), products_path %>
+<% if Current.user&.admin? || @product.owner? %>
+<div class="mt-4">
+    <%= link_to t('products.actions.edit'), 
+                    edit_product_path(@product), 
+                    class: "btn btn-outline-primary me-2" %>
+    <%= link_to t('products.actions.destroy'), 
+                    @product,
+                    class: "btn btn-outline-danger",
+                    data: { 
+                        turbo_method: :delete, 
+                        turbo_confirm: t('products.show.confirm_destroy') 
+                    } %>
+</div>
+<% end %>
+<div class="mt-4">
+    <%= link_to t('products.show.back'), products_path %>
+</div>

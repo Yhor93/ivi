@@ -23,7 +23,7 @@ class Authentication::SessionsController < ApplicationController
 
 
   def destroy
-    session[:user_id] = nil
-    redirect_to login_path, notice: t("authentication.sessions.notices.destroyed")
+    session.delete(:user_id)
+    redirect_to products_path, notice: t("authentication.sessions.notices.destroyed")
   end
 end

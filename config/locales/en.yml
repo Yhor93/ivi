@@ -126,9 +126,22 @@ en:
       notices:
         welcome: "Welcome back, %{name}!"
         created: "Logged in successfully."
+        confirm: "Are you sure you want to log out?"
         destroyed: "Logged out successfully."
       errors_title:
         invalid_credentials: "Invalid Credentials."
         must_be_logged_in: "You must be logged in to access this page."
+
+    navegation:
+      login: "Log In"
+      register: "Sign Up"
+      logout: "Log Out"
+    
+  errors:
+    not_found: "The page you are looking for does not exist."
+  
+  authorization:  
+    must_be_logged_in: "You must be logged in to perform this action."
+    not_allowed: "You do not have permission to perform this action."
 
     

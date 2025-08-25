@@ -3,6 +3,12 @@
     <h1><%= t('app.name') %></h1>
     <% end %>
     
-    <%= link_to t("products.index.add"), new_product_path %> |
-    <%= link_to t("categories.index.title"), categories_path %>
+    <%= link_to t("products.index.add"), new_product_path if Current.user %> |
+    <%= link_to t("categories.index.title"), categories_path if Current.user&.admin? %> |
+    <%= link_to t("navigation.login"), new_session_path  unless Current.user %> |
+    <%= link_to t("navigation.register"), new_user_path  unless Current.user %> |
+    <%= link_to t("navigation.logout"), session_path(Current.user.id), data: {
+        turbo_method: :delete,
+        turbo_confirm: t("authentication.sessions.notices.confirm")
+    }  if Current.user %> |
 </nav>

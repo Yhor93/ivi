@@ -11,7 +11,9 @@ class ProductsController < ApplicationController
   # GET /products/:id
   def show; end
   # GET /products/:id/edit
-  def edit; end
+  def edit
+    authorize!(@product)
+  end
   # GET /products/new
   def new
     @product = Product.new
@@ -19,7 +21,8 @@ class ProductsController < ApplicationController
 
   # POST /products
   def create
-    @product = Product.new(product_params)
+    @product = Current.user.products.new(product_params)
+
     if @product.save
       redirect_to @product, notice: "Producto creado con éxito."
     else
@@ -29,6 +32,7 @@ class ProductsController < ApplicationController
 
   # PATCH/PUT /products/:id
   def update
+    authorize!(@product)
     if @product.update(product_params)
       redirect_to @product, notice: "Producto actualizado con éxito."
     else
@@ -38,6 +42,7 @@ class ProductsController < ApplicationController
 
   # DELETE /products/:id
   def destroy
+    authorize!(@product)
     @product.destroy
     redirect_to products_path, notice: "Producto eliminado con éxito."
   end

@@ -124,8 +124,22 @@ es:
       notices:
         welcome: "¡Bienvenido de nuevo, %{name}!"
         created: "Sesión iniciada correctamente."
+        confirm: "¿Seguro que deseas cerrar sesión?"
         destroyed: "Sesión cerrada exitosamente."
       errors_title:
         invalid_credentials: "Credenciales Incorrectas."
         must_be_logged_in: "Debes iniciar sesión para acceder a esta página."
+
+  navigation:
+    login: "Iniciar sesión"
+    register: "Registrarse"
+    logout: "Cerrar sesión"
+
+  errors:
+    not_found: "Página no encontrada"
+
+  authorization:
+    must_be_logged_in: "🔐 Debes iniciar sesión primero."
+    not_allowed: "🚫 No tienes permiso para modificar este recurso."
+
 

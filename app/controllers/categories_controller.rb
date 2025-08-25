@@ -3,6 +3,7 @@ class CategoriesController < ApplicationController
 
   # GET /categories or /categories.json
   def index
+    authorize!
     @categories = Category.all.order(name: :asc)
   end
 
