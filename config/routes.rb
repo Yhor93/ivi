@@ -19,6 +19,11 @@ Rails.application.routes.draw do
   # Categorías (sin show)
   resources :categories, except: :show
 
+  # Favoritos
+  resources :products do
+  post :toggle_favorite, on: :member
+  end
+
   # CRUD de productos
   resources :products
 end

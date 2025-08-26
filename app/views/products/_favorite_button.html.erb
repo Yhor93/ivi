@@ -1,0 +1,14 @@
+<div id="<%= dom_id(product, :favorite_button) %>">
+    <% if Current.user %>
+        <% favorited = Current.user.favorites.exists?(product: product) %>
+        <%= button_to toggle_favorite_product_path(product), method: :post, form: { data: { turbo: true } }, class: "favorite-btn cursor-pointer" do %>
+            <% if favorited %>
+            <span>Añadido a favoritos</span> ❤️ 
+            <% else %>
+            <span>Añadir a favoritos</span> 🤍 
+            <% end %>
+        <% end %>
+        <% else %>
+        <%= link_to "🤍 Añadir a favoritos", new_session_path, class: "favorite-btn" %>
+    <% end %>
+</div>

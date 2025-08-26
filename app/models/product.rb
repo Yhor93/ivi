@@ -1,5 +1,8 @@
 class Product < ApplicationRecord
   has_one_attached :photo
+  has_many :favorites, dependent: :destroy
+  has_many :favorited_by_users, through: :favorites, source: :user
+
   belongs_to :category
   belongs_to :user
 

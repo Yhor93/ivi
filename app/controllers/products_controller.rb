@@ -1,5 +1,5 @@
 class ProductsController < ApplicationController
-  before_action :set_product, only: [ :show, :edit, :update, :destroy ]
+  before_action :set_product, only: [ :show, :edit, :update, :destroy, :toggle_favorite ]
   skip_before_action :protect_pages, only: %i[index show]
 
   # GET /products
@@ -46,6 +46,24 @@ class ProductsController < ApplicationController
     @product.destroy
     redirect_to products_path, notice: "Producto eliminado con éxito."
   end
+
+  # Añadir o quitar de favoritos
+  def toggle_favorite
+    favorite = Current.user.favorites.find_by(product: @product)
+
+    if favorite
+      favorite.destroy
+    else
+      Current.user.favorites.create!(product: @product)
+    end
+
+    respond_to do |format|
+      format.turbo_stream
+      format.html { redirect_back fallback_location: products_path }
+    end
+  end
+
+
 
   private
 

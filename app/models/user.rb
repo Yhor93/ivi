@@ -2,6 +2,9 @@ class User < ApplicationRecord
   # Manejo seguro de contraseñas
   has_secure_password
   has_many :products, dependent: :destroy
+  has_many :favorites, dependent: :destroy
+  has_many :favorite_products, through: :favorites, source: :product
+
 
   # Regex para validar formato de nombre (
   VALID_NAME_REGEX = /\A[a-zA-Z0-9]+\z/

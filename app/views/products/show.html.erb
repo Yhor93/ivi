@@ -2,7 +2,6 @@
 
 <%= image_tag @product.photo.variant(resize_to_limit: [400, 150]) if @product.photo.attached? %>
 
-
 <p><strong><%= t('products.form.description') %></strong></p>
 <p><%= @product.description %></p>
 
@@ -11,19 +10,19 @@
 
 <% if Current.user&.admin? || @product.owner? %>
 <div class="mt-4">
-    <%= link_to t('products.actions.edit'), 
-                    edit_product_path(@product), 
-                    class: "btn btn-outline-primary me-2" %>
-    <%= link_to t('products.actions.destroy'), 
-                    @product,
-                    class: "btn btn-outline-danger",
-                    data: { 
-                        turbo_method: :delete, 
-                        turbo_confirm: t('products.show.confirm_destroy') 
-                    } %>
+    <%= link_to t('products.actions.edit'), edit_product_path(@product), class: "btn btn-outline-primary me-2" %>
+    <%= link_to t('products.actions.destroy'), @product, class: "btn btn-outline-danger", data: { turbo_method: :delete, turbo_confirm: t('products.show.confirm_destroy') } %>
 </div>
 <% end %>
+
+<% if Current.user %>
+<div class="mt-4">
+    <%= render "products/favorite_button", product: @product %>
+</div>
+<% end %>
+
 <%= link_to t('.view_more_products', username: @product.user.username), user_path(@product.user.username) %>
+
 <div class="mt-4">
     <%= link_to t('products.show.back'), products_path %>
 </div>
