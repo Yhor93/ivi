@@ -106,6 +106,7 @@ en:
       new:
         title: "Sign Up"
         submit: "Create Account"
+        already_have_account: "Already have an account?"
         back: "Back to products"
       form:
         username: "Username"
@@ -122,6 +123,7 @@ en:
       new:
         title: "Log In"
         submit: "Log In"
+        already_have_account: "Already have an account?"
         back_to_signup: "Sign Up"
       form:
         login: "Email or Name"

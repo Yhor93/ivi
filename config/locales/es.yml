@@ -104,6 +104,7 @@ es:
       new:
         title: "Registro de Usuario"
         submit: "Crear cuenta"
+        already_have_account: "¿Ya tienes una cuenta?"
         back: "Volver a productos"
       form:
         username: "Nombre de usuario"
@@ -124,6 +125,7 @@ es:
       new:
         title: "Iniciar Sesión"
         submit: "Iniciar Sesión"
+        forgot_password: "¿Olvidaste tu contraseña?"
         back_to_signup: "Registrarse"
       form:
         login: "Usuario o correo electrónico"

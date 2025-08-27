@@ -1,14 +1,21 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-300">
-    <div class="bg-white p-8 rounded-lg shadow-md w-full max-w-md">
-        <h1 class="mb-6 text-2xl font-bold text-center text-gray-800">
+<div class="relative min-h-screen flex items-center justify-center ">
+
+    <!-- Imagen arriba a la izquierda -->
+    <div class="absolute top-0 left-0 transform translate-x-1/4 translate-y-1/4 z-0">
+        <%= image_tag "bg_register.png", class: "w-96 opacity-80 object-contain pointer-events-none" %>
+    </div>
+
+    <!-- Card formulario -->
+    <div class="relative my-4 p-8 rounded-2xl shadow-xl w-full max-w-md z-10">
+        <h1 class="mb-6 text-2xl font-bold text-center text-blue-900">
             <%= t('authentication.users.new.title') %>
         </h1>
 
         <%= form_with model: @user, url: users_path, local: true do |f| %>
         <% if @user.errors.any? %>
-        <div style="color: red;">
-            <h2><%= t('authentication.users.errors_title.other', count: @user.errors.count) %></h2>
-            <ul>
+        <div class="mb-4 text-red-600 text-sm">
+            <h2 class="font-semibold"><%= t('authentication.users.errors_title.other', count: @user.errors.count) %></h2>
+            <ul class="list-disc list-inside">
                 <% @user.errors.full_messages.each do |msg| %>
                 <li><%= msg %></li>
                 <% end %>
@@ -16,37 +23,49 @@
         </div>
         <% end %>
 
-        <div>
-            <%= f.label :name, t('authentication.users.form.name'), class: "text-md font-medium" %><br>
-            <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
-        </div>
-
-        <div>
-            <%= f.label :username, t('authentication.users.form.username'), class: "text-md font-medium " %><br>
-            <%= f.text_field :username, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
-        </div>
-
-        <div>
-            <%= f.label :email, t('authentication.users.form.email'), class: "text-md font-medium " %><br>
-            <%= f.email_field :email, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
-        </div>
-
-        <div>
-            <%= f.label :password, t('authentication.users.form.password'), class: "text-md font-medium " %><br>
-            <%= f.password_field :password, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
+        <!-- Campos -->
+        <div class="mb-4">
+            <%= f.label :name, t('authentication.users.form.name'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
         </div>
 
         <div class="mb-4">
-            <%= f.label :password_confirmation, t('authentication.users.form.password_confirmation'), class: "text-md font-medium " %><br>
-            <%= f.password_field :password_confirmation, required: true, class: "w-full border border-gray-300 rounded px-3 py-2 focus:outline-none focus:ring focus:ring-blue-300 transition duration-200" %>
+            <%= f.label :username, t('authentication.users.form.username'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.text_field :username, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
         </div>
 
-        <div class="flex justify-center">
-            <%= button_tag t('authentication.users.new.submit'), type: "submit",
-                class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 cursor-pointer" do %>
-            <span class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-md transition-all duration-200 ease-in group-hover:bg-transparent group-hover:text-white dark:bg-gray-900 dark:text-white">
-                <%= t('authentication.users.new.submit') %>
-            </span>
+        <div class="mb-4">
+            <%= f.label :email, t('authentication.users.form.email'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.email_field :email, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
+        </div>
+
+        <div class="mb-4">
+            <%= f.label :password, t('authentication.users.form.password'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.password_field :password, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
+        </div>
+
+        <div class="mb-2">
+            <%= f.label :password_confirmation, t('authentication.users.form.password_confirmation'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.password_field :password_confirmation, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
+        </div>
+
+        <!-- Enlaces -->
+        <div class="flex justify-between items-center text-sm">
+            <%= link_to t('authentication.users.new.already_have_account'), new_session_path, class: "text-green-600 my-4 hover:underline" %>
+        </div>
+
+        <div class="flex justify-between items-center mb-4">
+            <div class="flex justify-center">
+                <%= button_tag type: "submit",
+                    class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 cursor-pointer" do %>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-md transition-all duration-200 ease-in group-hover:bg-transparent group-hover:text-white dark:bg-gray-900 dark:text-white">
+                    <%= t('authentication.users.new.submit') %>
+                </span>
+                <% end %>
+            </div>
+
+            <%= link_to products_path, class: "px-4 py-2 text-sm font-medium border border-green-600 text-green-600 rounded-lg hover:bg-green-500 hover:text-white  focus:ring-2 focus:ring-green-30 transition duration-200" do %>
+            <%= t('authentication.users.new.back') %>
             <% end %>
         </div>
         <% end %>
