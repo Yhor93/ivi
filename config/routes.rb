@@ -14,14 +14,18 @@ Rails.application.routes.draw do
   end
 
   # Perfil de usuario (por username en lugar de id)
-  resources :users, only: :show, path: "/user", param: :username
+  resources :users, only: :show, path: "/user", param: :username do
+    member do
+      get :favorites  # Nueva ruta para favoritos
+    end
+  end
 
   # Categorías (sin show)
   resources :categories, except: :show
 
   # Favoritos
   resources :products do
-  post :toggle_favorite, on: :member
+    post :toggle_favorite, on: :member
   end
 
   # CRUD de productos

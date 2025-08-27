@@ -27,9 +27,10 @@ es:
       confirm_destroy: "¿Seguro que deseas eliminar este producto?"
       no_photo: "Sin foto"
     show:
-      view_more_products: "Ver más productos de %{username}"
       back: "Volver a la lista"
       confirm_destroy: "¿Seguro que deseas eliminar este producto?"
+      go_to_my_profile: "Ir a mi perfil"
+      view_more_products: "Ver más productos de %{username}"
     new:
       title: "Crear Producto"
       save: "Guardar"

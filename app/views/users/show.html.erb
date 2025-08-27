@@ -9,32 +9,55 @@
         </div>
     </div>
 
-    <!-- Mis productos -->
-    <h3 class="text-xl font-semibold mb-4">Mis productos</h3>
+    <!-- Pestañas -->
+    <div class="mb-6">
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8">
+                <%= link_to user_path(@user.username), 
+                    class: "py-2 px-1 border-b-2 font-medium text-sm #{'border-blue-500 text-blue-600' if request.path == user_path(@user.username)} #{'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' unless request.path == user_path(@user.username)}" do %>
+                    Mis productos
+                <% end %>
+                
+                <%= link_to favorites_user_path(@user.username), 
+                    class: "py-2 px-1 border-b-2 font-medium text-sm #{'border-blue-500 text-blue-600' if request.path == favorites_user_path(@user.username)} #{'border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300' unless request.path == favorites_user_path(@user.username)}" do %>
+                    Mis Favoritos
+                <% end %>
+            </nav>
+        </div>
+    </div>
 
-    <% if @user.products.any? %>
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-        <% @user.products.each do |product| %>
-        <div class="bg-white p-4 rounded-lg shadow">
-            <h4 class="font-bold text-lg"><%= product.title %></h4>
-            <p class="text-gray-600"><%= number_to_currency(product.price) %></p>
+    <!-- Contenido de Mis productos -->
+    <% if request.path == user_path(@user.username) %>
+        <h3 class="text-xl font-semibold mb-4">Mis productos</h3>
+        
+        <% if @products.any? %>
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+            <% @products.each do |product| %>
+            <div class="bg-white p-4 rounded-lg shadow">
+                <h4 class="font-bold text-lg"><%= product.title %></h4>
+                <p class="text-gray-600"><%= number_to_currency(product.price) %></p>
 
-            <%# Si hay imagen %>
-            <% if product.photo.attached? %>
-            <%= image_tag product.photo, class: "w-full h-48 object-cover rounded my-2" %>
-            <% end %>
+                <%# Si hay imagen %>
+                <% if product.photo.attached? %>
+                <%= image_tag product.photo, class: "w-full h-48 object-cover rounded my-2" %>
+                <% end %>
 
-            <% if Current.user&.admin? || product.owner? %>
-            <div class="mt-2 flex gap-2">
-                <%= link_to "Editar", edit_product_path(product), class: "text-blue-600" %>
-                <%= link_to "Eliminar", product, method: :delete, data: { confirm: "¿Seguro?" }, class: "text-red-600" %>
+                <div class="mt-2">
+                    <%= link_to "Ver", product_path(product), class: "text-blue-600 hover:underline" %>
+                </div>
+
+                <% if Current.user&.admin? || product.owner? %>
+                <div class="mt-2 flex gap-2">
+                    <%= link_to "Editar", edit_product_path(product), class: "text-blue-600" %>
+                    <%= link_to "Eliminar", product, method: :delete, data: { confirm: "¿Seguro?" }, class: "text-red-600" %>
+                </div>
+                <% end %>
             </div>
             <% end %>
         </div>
+        <% else %>
+        <p class="text-gray-500">Este usuario no ha creado productos aún.</p>
         <% end %>
-    </div>
-    <% else %>
-    <p class="text-gray-500">Este usuario no ha creado productos aún.</p>
     <% end %>
 
 </div>

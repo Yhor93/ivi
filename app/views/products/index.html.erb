@@ -1,76 +1,140 @@
-<div class="flex flex-col h-screen">
-
+<div class="flex flex-col min-h-screen bg-green-50">
 
     <!-- ====== CONTENIDO PRINCIPAL (Sidebar + Cards) ====== -->
-    <div class="flex flex-col md:flex-row gap-4 h-screen p-4 overflow-hidden">
+    <div class="flex flex-col md:flex-row gap-4 flex-grow p-4">
 
         <!-- ====== SIDEBAR IZQUIERDA ====== -->
-        <div class="w-full md:w-1/4 border rounded-sm shadow-sm h-full overflow-y-auto">
+        <div class="h-full md:w-1/4 max-w-2xl mx-auto md:mx-0 rounded-xl bg-white shadow-md">
             <aside class="p-4 ">
                 <div class="my-2 flex flex-wrap items-center gap-6 text-lg font-semibold">
                     <!-- Filtro Buscar -->
-                    <h3 class="text-lg font-semibold">Buscar</h3>
-                    <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" }, class: "flex gap-2 hover:bg-blue-100 hover:rounded-md transition duration-200" do |f| %>
-                    <%= f.text_field :query_text, value: params[:query_text], placeholder: "Buscar...", onchange: 'this.form.submit()',class: "border border-gray-300 rounded focus:ring focus:ring-blue-200" %>
-                    <%= hidden_field_tag :category_id, params[:category_id] %>
-                    <%= hidden_field_tag :min_price, params[:min_price] %>
-                    <%= hidden_field_tag :max_price, params[:max_price] %>
-                    <%= hidden_field_tag :sort, params[:sort] %>
-                    <% end %>
-                </div>
-
-                <!-- Filtro Ordenar Por -->
-                <h3 class="text-lg font-semibold">Filtros</h3>
-                <h3 class="text-lg font-semibold mb-2">Ordenar por</h3>
-                <div class="ml-20 ">
-                    <ul class="sorting-options space-y-2">
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Título (A–Z)", products_path(request.query_parameters.merge(sort: "title_asc")), data: { turbo_frame: "products_frame" } %></li>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Título (Z–A)", products_path(request.query_parameters.merge(sort: "title_desc")), data: { turbo_frame: "products_frame" } %></li>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Precio (menor a mayor)", products_path(request.query_parameters.merge(sort: "price_asc")), data: { turbo_frame: "products_frame" } %></li>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Precio (mayor a menor)", products_path(request.query_parameters.merge(sort: "price_desc")), data: { turbo_frame: "products_frame" } %></li>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Más recientes", products_path(request.query_parameters.merge(sort: "newest")), data: { turbo_frame: "products_frame" } %></li>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200"><%= link_to "Más antiguos", products_path(request.query_parameters.merge(sort: "oldest")), data: { turbo_frame: "products_frame" } %></li>
-                    </ul>
-                </div>
-
-                <!-- Filtro Precio -->
-                <h3 class="text-lg font-semibold mb-2">Precio</h3>
-                <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" } do %>
-                <%= number_field_tag :min_price, params[:min_price], placeholder: "Mínimo", class: "w-32 border border-gray-300 rounded hover:bg-blue-100 hover:rounded-md transition duration-200", onchange: "this.form.submit()" %>
-                <label class="px-2 text-lg font-semibold"> a</label>
-                <%= number_field_tag :max_price, params[:max_price], placeholder: "Máximo", class: "w-32 border border-gray-300 rounded hover:bg-blue-100 hover:rounded-md transition duration-200", onchange: "this.form.submit()" %>
-                <%= hidden_field_tag :query_text, params[:query_text] %>
-                <%= hidden_field_tag :category_id, params[:category_id] %>
-                <%= hidden_field_tag :sort, params[:sort] %>
-                <% end %>
-
-                <!-- Filtro Categoría -->
-                <h3 class="text-lg font-semibold mb-2">Categorías</h3>
-                <div class="ml-20">
-                    <ul class="space-y-2">
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200">
-                            <%= link_to "Todas", products_path(request.query_parameters.merge(category_id: nil)), data: { turbo_frame: "products_frame" } %>
-                        </li>
-                        <% @categories.each do |category| %>
-                        <li class="hover:bg-blue-100 hover:rounded-md transition duration-200">
-                            <%= link_to category.name, products_path(request.query_parameters.merge(category_id: category.id)), data: { turbo_frame: "products_frame" } %>
-                        </li>
+                    <div class="my-2 space-y-2 w-full">
+                        <h3 class="text-lg text-gray-900 font-medium">Buscar</h3>
+                        <%= form_with url: products_path, method: :get,data: { turbo_frame: "products_frame" }, class: "w-full" do |f| %>
+                        <%= f.text_field :query_text, 
+                                value: params[:query_text], 
+                                placeholder: "Buscar...", 
+                                onchange: 'this.form.submit()',
+                                class: "w-full border border-gray-500 rounded 
+                                        focus:border-green-500 focus:ring focus:ring-green-400 outline-none" %>
+                        <%= hidden_field_tag :category_id, params[:category_id] %>
+                        <%= hidden_field_tag :min_price, params[:min_price] %>
+                        <%= hidden_field_tag :max_price, params[:max_price] %>
+                        <%= hidden_field_tag :sort, params[:sort] %>
                         <% end %>
-                    </ul>
+                    </div>
+                </div>
+
+                <!-- Filtros -->
+                <div class="space-y-6">
+                    <h3 class="text-lg text-gray-900 font-medium mb-2">Filtros</h3>
+
+                    <!-- Filtro Ordenar Por -->
+                    <h3 class="text-lg text-gray-900 font-medium mb-2">Ordenar por</h3>
+                    <div class="ml-10">
+                        <ul class="space-y-1">
+                            <li>
+                                <%= link_to "Título (A–Z)", 
+                                    products_path(request.query_parameters.merge(sort: "title_asc")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                            <li>
+                                <%= link_to "Título (Z–A)", 
+                                    products_path(request.query_parameters.merge(sort: "title_desc")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                            <li>
+                                <%= link_to "Precio (menor a mayor)", 
+                                    products_path(request.query_parameters.merge(sort: "price_asc")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                            <li>
+                                <%= link_to "Precio (mayor a menor)", 
+                                    products_path(request.query_parameters.merge(sort: "price_desc")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                            <li>
+                                <%= link_to "Más recientes", 
+                                    products_path(request.query_parameters.merge(sort: "newest")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                            <li>
+                                <%= link_to "Más antiguos", 
+                                    products_path(request.query_parameters.merge(sort: "oldest")), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 transition duration-200" %>
+                            </li>
+                        </ul>
+                    </div>
+
+                    <!-- Filtro Precio -->
+                    <div>
+                        <h3 class="text-lg text-gray-900 font-medium mb-2">Precio</h3>
+                        <%= form_with url: products_path, method: :get, data: { turbo_frame: "products_frame" }, class: "space-y-3" do %>
+                        <div class="flex flex-col sm:flex-row gap-2 items-center">
+                            <%= number_field_tag :min_price, params[:min_price], 
+                                    placeholder: "Mínimo", 
+                                    class: "w-full sm:flex-1 px-3 py-2 border border-gray-300 rounded-lg 
+                                            focus:border-green-500 focus:ring-2 focus:ring-green-200 
+                                            outline-none transition-colors duration-200", 
+                                    onchange: "this.form.submit()" %>
+                            <span class="text-sm font-medium text-gray-500 hidden sm:block">a</span>
+                            <%= number_field_tag :max_price, params[:max_price], 
+                                    placeholder: "Máximo", 
+                                    class: "w-full sm:flex-1 px-3 py-2 border border-gray-300 rounded-lg 
+                                            focus:border-green-500 focus:ring-2 focus:ring-green-200 
+                                            outline-none transition-colors duration-200", 
+                                    onchange: "this.form.submit()" %>
+                        </div>
+                        <%= hidden_field_tag :query_text, params[:query_text] %>
+                        <%= hidden_field_tag :category_id, params[:category_id] %>
+                        <%= hidden_field_tag :sort, params[:sort] %>
+                        <% end %>
+                    </div>
+
+                    <!-- Filtro Categoría -->
+                    <h3 class="text-lg font-semibold mb-2">Categorías</h3>
+                    <div class="ml-10">
+                        <ul class="space-y-2">
+                            <li>
+                                <%= link_to "Todas", 
+                                    products_path(request.query_parameters.merge(category_id: nil)), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 
+                                    transition duration-200" %>
+                            </li>
+                            <% @categories.each do |category| %>
+                            <li>
+                                <%= link_to category.name, 
+                                    products_path(request.query_parameters.merge(category_id: category.id)), 
+                                    data: { turbo_frame: "products_frame" },
+                                    class: "block px-3 py-2 text-sm rounded-md hover:bg-green-100 hover:text-green-700 
+                                    transition duration-200" %>
+                            </li>
+                            <% end %>
+                        </ul>
+
+                    </div>
                 </div>
             </aside>
         </div>
 
         <!-- ====== CONTENIDO DERECHA ====== -->
-        <div class="w-full md:w-3/4 border rounded h-full overflow-y-auto">
-            <main class="m-4 h-full">
+        <div class="w-full md:w-3/4 ">
+            <main class="px-2 h-full">
                 <%= turbo_frame_tag "products_frame" do %>
                 <% if @products.any? %>
                 <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                    <%= render @products %> 
+                    <%= render @products %>
                 </div>
                 <% end %>
                 <% end %>
             </main>
         </div>
     </div>
+</div>

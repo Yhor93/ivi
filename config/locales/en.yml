@@ -26,9 +26,10 @@ en:
       confirm_destroy: "Are you sure you want to delete this product?"
       no_photo: "No photo"
     show:
-      view_more_products: "View more products from %{username}"
       back: "Back to list"
       confirm_destroy: "Are you sure you want to delete this product?"
+      go_to_my_profile: "Go to my profile"
+      view_more_products: "View more products from %{username}"
     new:
       title: "Create Product"
       save: "Save"

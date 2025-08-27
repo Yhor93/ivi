@@ -1,14 +1,20 @@
 <div id="<%= dom_id(product, :favorite_button) %>">
     <% if Current.user %>
-        <% favorited = Current.user.favorites.exists?(product: product) %>
-        <%= button_to toggle_favorite_product_path(product), method: :post, form: { data: { turbo: true } }, class: "favorite-btn cursor-pointer" do %>
-            <% if favorited %>
-            <span>Añadido a favoritos</span> ❤️ 
-            <% else %>
-            <span>Añadir a favoritos</span> 🤍 
-            <% end %>
-        <% end %>
-        <% else %>
-        <%= link_to "🤍 Añadir a favoritos", new_session_path, class: "favorite-btn" %>
+    <% favorited = Current.user.favorites.exists?(product: product) %>
+    <%= button_to toggle_favorite_product_path(product),
+                    method: :post,
+                    form: { data: { turbo: true } },
+                    class: "group relative w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg font-medium transition-all duration-300 shadow-md hover:shadow-lg 
+                            #{favorited ? 'bg-red-500 text-white hover:bg-red-600' : 'bg-gray-100 text-gray-800 hover:bg-green-600 hover:text-white'}" do %>
+
+    <% if favorited %>
+    ❤️ <span class="group-hover:scale-105 transition-transform">Añadido a favoritos</span>
+    <% else %>
+    🤍 <span class="group-hover:scale-105 transition-transform">Añadir a favoritos</span>
+    <% end %>
+    <% end %>
+    <% else %>
+    <%= link_to "🤍 Añadir a favoritos", new_session_path,
+                class: "w-full flex items-center justify-center gap-2 px-5 py-2.5 rounded-lg bg-gray-100 text-gray-800 font-medium hover:bg-green-600 hover:text-white transition-all duration-300 shadow-md hover:shadow-lg" %>
     <% end %>
 </div>

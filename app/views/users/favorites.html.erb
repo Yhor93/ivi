@@ -1,0 +1,75 @@
+<div class="max-w-4xl mx-auto mt-8">
+
+    <!-- Info del usuario -->
+    <div class="bg-white p-6 rounded-lg shadow mb-6 flex items-center">
+        <div>
+            <h2 class="text-2xl font-bold"><%= @user.username %></h2>
+            <p class="text-gray-600"><strong>Nombre:</strong> <%= @user.name %></p>
+            <p class="text-gray-600"><strong>Correo:</strong> <%= @user.email %></p>
+        </div>
+    </div>
+
+    <!-- Pestañas -->
+    <div class="mb-6">
+        <div class="border-b border-gray-200">
+            <nav class="-mb-px flex space-x-8">
+                <%= link_to user_path(@user.username), 
+                    class: "py-2 px-1 border-b-2 font-medium text-sm border-transparent text-gray-500 hover:text-gray-700 hover:border-gray-300" do %>
+                    Mis productos
+                <% end %>
+                
+                <%= link_to favorites_user_path(@user.username), 
+                    class: "py-2 px-1 border-b-2 font-medium text-sm border-blue-500 text-blue-600" do %>
+                    Mis Favoritos
+                <% end %>
+            </nav>
+        </div>
+    </div>
+
+    <!-- Contenido de Mis favoritos -->
+    <h3 class="text-xl font-semibold mb-4">Mis Favoritos</h3>
+    
+    <% if @favorite_products.any? %>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <% @favorite_products.each do |product| %>
+        <div class="bg-white p-4 rounded-lg shadow">
+            <h4 class="font-bold text-lg"><%= product.title %></h4>
+            <p class="text-gray-600"><%= number_to_currency(product.price) %></p>
+            <p class="text-sm text-gray-500 mb-2">Por: <%= product.user.username %></p>
+
+            <%# Si hay imagen %>
+            <% if product.photo.attached? %>
+            <%= image_tag product.photo, class: "w-full h-48 object-cover rounded my-2" %>
+            <% end %>
+
+            <div class="mt-2 flex gap-2">
+                <%= link_to "Ver", product_path(product), class: "text-blue-600 hover:underline" %>
+                
+                <!-- Botón de quitar de favoritos -->
+                <% if Current.user == @user %>
+                    <%= button_to toggle_favorite_product_path(product), method: :post, 
+                        form: { data: { turbo: true } }, 
+                        class: "text-red-600 hover:underline bg-transparent border-none p-0 cursor-pointer" do %>
+                        Quitar ❤️
+                    <% end %>
+                <% end %>
+            </div>
+        </div>
+        <% end %>
+    </div>
+    <% else %>
+    <div class="text-center py-8">
+        <p class="text-gray-500 mb-4">
+            <% if Current.user == @user %>
+                No tienes productos en favoritos aún.
+            <% else %>
+                <%= @user.username %> no tiene productos en favoritos.
+            <% end %>
+        </p>
+        <% if Current.user == @user %>
+            <%= link_to "Explorar productos", products_path, class: "text-blue-600 hover:underline" %>
+        <% end %>
+    </div>
+    <% end %>
+
+</div>

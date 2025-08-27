@@ -1,0 +1,50 @@
+<footer class="bg-green-100 text-gray-700">
+    <div class="max-w-7xl mx-auto px-4 py-10 grid grid-cols-1 md:grid-cols-3 gap-8">
+
+        <!-- CATEGORÍAS -->
+        <div>
+            <h3 class="text-lg font-bold text-green-600 mb-3">Categorías</h3>
+            <ul class="grid grid-cols-2 gap-2">
+                <li><%= link_to "Tecnología", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Hogar", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Moda", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Deportes", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Más...", "#", class: "hover:text-green-500" %></li>
+            </ul>
+        </div>
+
+        <!-- INFO RÁPIDA -->
+        <div>
+            <h3 class="text-lg font-bold text-green-600 mb-3">Enlaces Rápidos</h3>
+            <ul class="grid grid-cols-2 gap-2">
+                <li><%= link_to "Inicio", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Ofertas", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Favoritos", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Sobre nosotros", "#", class: "hover:text-green-500" %></li>
+                <li><%= link_to "Contacto", "#", class: "hover:text-green-500" %></li>
+            </ul>
+        </div>
+
+        <!-- CONTACTO -->
+        <div class="grid grid-cols-2 gap-2">
+            <h3 class="text-lg font-bold text-green-600 mb-3">Contáctanos</h3>
+            <p class="mb-2">📍 Bogotá, Colombia</p>
+            <p class="mb-2">📧 contacto@tienda.com</p>
+            <p>📞 +57 300 000 0000</p>
+            <div class="flex space-x-4 mt-4 text-xl">
+                <%= link_to "🌐", "#", class: "hover:text-green-500" %>
+                <%= link_to "🐦", "#", class: "hover:text-green-500" %>
+                <%= link_to "📘", "#", class: "hover:text-green-500" %>
+                <%= link_to "📸", "#", class: "hover:text-green-500" %>
+            </div>
+        </div>
+
+    </div>
+
+    <!-- FIRMA -->
+    <div class="border-t border-gray-300 text-center py-4 text-sm text-gray-600">
+        © <%= Time.current.year %> Todos los derechos reservados.
+        &nbsp;&nbsp;
+        🚀 Desarrollado por <span class="font-bold text-green-600">YhorDEV</span>
+    </div>
+</footer>
