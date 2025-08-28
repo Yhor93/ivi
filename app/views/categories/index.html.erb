@@ -1,9 +1,116 @@
 <% content_for :title, t('categories.index.title') %>
 
-<h1><%= t('categories.index.title') %></h1>
+<div class="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 py-8">
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
 
-<%= render @categories %>
+        <!-- Header Section -->
+        <div class="flex flex-col sm:flex-row justify-between items-center mb-8">
+            <div>
+                <h1 class="text-3xl font-bold text-gray-900 mb-2">
+                    <%= t('categories.index.title') %>
+                </h1>
+                <p class="text-gray-600 text-lg">
+                    Administra y organiza todas las categorías
+                </p>
+            </div>
 
-<%= link_to t('categories.index.new_category'), new_category_path %>
+            <!-- Botón Nueva Categoría -->
+            <div class="mt-4 sm:mt-0">
+                <%= link_to new_category_path, 
+                    class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 cursor-pointer shadow-lg hover:shadow-xl transition-all duration-200" do %>
+                <span class="flex items-center px-6 py-3 text-sm font-medium text-gray-900 bg-white rounded-md transition-all duration-200 ease-in group-hover:bg-transparent group-hover:text-white">
+                    <svg class="w-5 h-5 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"></path>
+                    </svg>
+                    <%= t('categories.index.new_category') %>
+                </span>
+                <% end %>
+            </div>
+        </div>
 
+        <!-- Estadistica de Categorias -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-blue-100">
+                        <svg class="w-6 h-6 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Total Categorías</p>
+                        <p class="text-2xl font-semibold text-gray-900"><%= @categories.count %></p>
+                    </div>
+                </div>
+            </div>
 
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-green-100">
+                        <svg class="w-6 h-6 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Activas</p>
+                        <p class="text-2xl font-semibold text-gray-900"><%= @categories.count %></p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="bg-white rounded-xl shadow-sm border border-gray-200 p-6">
+                <div class="flex items-center">
+                    <div class="p-3 rounded-full bg-purple-100">
+                        <svg class="w-6 h-6 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7h8m0 0v8m0-8l-8 8-4-4-6 6"></path>
+                        </svg>
+                    </div>
+                    <div class="ml-4">
+                        <p class="text-sm font-medium text-gray-600">Más Usada</p>
+                        <p class="text-2xl font-semibold text-gray-900">-</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Lista de Categorias -->
+        <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <% if @categories.any? %>
+            <% @categories.order(:name).each do |category| %>
+            <div class="flex flex-col justify-between p-4 bg-white rounded-xl shadow-lg hover:shadow-2xl transition-shadow duration-300 border border-gray-200">
+                <!-- Nombre de la categoría -->
+                <div class="flex items-center space-x-4 mb-4">
+                    <div class="w-12 h-12 flex items-center justify-center bg-blue-100 rounded-full text-gray-900 font-bold text-lg">
+                        <%= category.name[0].upcase %>
+                    </div>
+                    <div>
+                        <p class="text-gray-900 font-semibold text-lg"><%= category.name %></p>
+                        <p class="text-gray-500 text-sm">ID: <%= category.id %></p>
+                    </div>
+                </div>
+
+                <!-- Botones -->
+                <div class="flex gap-4">
+                    <%= link_to "Editar", edit_category_path(category), 
+                        class: "flex-1 text-center bg-blue-400 text-white py-2 rounded-lg hover:bg-blue-600 transition" %>
+
+                    <%= link_to "Eliminar", category_path(category),
+                        data: { turbo_method: :delete, turbo_confirm: "¿Estás seguro?" },
+                        class: "flex-1 text-center bg-red-400 text-white py-2 rounded-lg hover:bg-red-600 transition" %>
+                </div>
+            </div>
+            <% end %>
+            <% else %>
+            <div class="col-span-full px-4 py-12 text-center">
+                <div class="mx-auto w-24 h-24 bg-gray-100 rounded-full flex items-center justify-center mb-4">
+                    <svg class="w-12 h-12 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"></path>
+                    </svg>
+                </div>
+                <h3 class="text-lg font-medium text-gray-900 mb-2">No hay categorías</h3>
+                <p class="text-gray-500 mb-6">Comienza creando tu primera categoría</p>
+            </div>
+            <% end %>
+        </div>
+    </div>
+</div>

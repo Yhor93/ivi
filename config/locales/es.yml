@@ -32,7 +32,7 @@ es:
       go_to_my_profile: "Ir a mi perfil"
       view_more_products: "Ver más productos de %{username}"
     new:
-      title: "Crear Producto"
+      title: "Publicar Producto"
       save: "Guardar"
       back: "Volver a la lista de productos"
     edit:
@@ -73,7 +73,7 @@ es:
       title: "Nueva Categoría"
     edit:
       title: "Editar Categoría"
-    category:
+    form:
       name: "Nombre"
     notices:
       created: "Categoría creada con éxito."

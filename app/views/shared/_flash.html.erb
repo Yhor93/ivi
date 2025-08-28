@@ -1,3 +1,32 @@
-<% flash.each do |key, message| %>
-<div class="flash <%= key %>"><%= message %></div>
-<% end %>
+<div class="fixed top-4 right-4 space-y-2 z-50">
+    <% flash.each do |key, message| %>
+    <% case key.to_sym
+        when :notice
+        bg_color = "bg-white"
+        border_color = "border-green-700"
+        text_color = "text-green-700"
+        when :alert
+        bg_color = "bg-red-100"
+        border_color = "border-red-700"
+        text_color = "text-red-700"
+        else
+        bg_color = "bg-blue-100"
+        border_color = "border-blue-700"
+        text_color = "text-blue-700"
+    end %>
+
+    <div class="flash-message <%= bg_color %> <%= border_color %> <%= text_color %> border-4 px-4 py-2 rounded-lg shadow-lg transition-opacity duration-700">
+        <%= message %>
+    </div>
+    <% end %>
+</div>
+
+<script>
+    // Ocultar automáticamente los toasts después de 3 segundos
+    setTimeout(() => {
+        document.querySelectorAll(".flash-message").forEach(el => {
+            el.classList.add("opacity-0");
+            setTimeout(() => el.remove(), 700); // coincide con duration-700
+        });
+    }, 3000);
+</script>

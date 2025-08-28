@@ -1,10 +1,48 @@
 <% content_for :title, t("categories.new.title") %>
 
-<h1><%= t("categories.new.title") %></h1>
+<div class="relative min-h-screen flex items-center justify-center">
 
-<%= render "form", category: @category %>
+    <!-- Card formulario -->
+    <div class="relative my-4 p-8 rounded-2xl shadow-xl w-full max-w-md z-10 bg-white">
 
+        <h1 class="mb-6 text-2xl font-bold text-center text-gray-900">
+            <%= t("categories.new.title") %>
+        </h1>
 
-<div>
-  <%= link_to t("common.back_to_categories"), categories_path %>
+        <%= form_with model: @category, url: categories_path, local: true do |f| %>
+
+        <% if @category.errors.any? %>
+        <div class="mb-4 text-red-600 text-sm">
+            <h2 class="font-semibold"><%= t('authentication.users.errors_title.other', count: @category.errors.count) %></h2>
+            <ul class="list-disc list-inside">
+                <% @category.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <!-- Campo único -->
+        <div class="mb-6">
+            <%= f.label :name, t("categories.form.name"), class: "text-sm font-medium text-gray-700" %>
+            <%= f.text_field :name, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-between items-center mb-4">
+            <!-- Guardar -->
+            <%= button_tag type: "submit",
+            class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 cursor-pointer" do %>
+            <span class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-md transition-all duration-200 ease-in group-hover:bg-transparent group-hover:text-white dark:bg-gray-900 dark:text-white">
+                <%= t("common.save") %>
+            </span>
+            <% end %>
+
+            <!-- Atrás -->
+            <%= link_to categories_path, class: "px-4 py-2 text-sm font-medium border border-green-600 text-green-600 rounded-lg hover:bg-green-500 hover:text-white focus:ring-2 focus:ring-green-300 transition duration-200" do %>
+            <%= t("common.back_to_categories") %>
+            <% end %>
+        </div>
+        <% end %>
+    </div>
 </div>

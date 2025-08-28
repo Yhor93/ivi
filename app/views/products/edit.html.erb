@@ -1,6 +1,105 @@
+<!-- Editar Producto -->
+<div class="relative min-h-screen flex items-center justify-center">
 
-<h1><%= t('products.edit.title') %></h1>
+    <!-- Card formulario -->
+    <div class="relative my-4 p-8 rounded-2xl w-full max-w-md z-10 shadow-2xl bg-white">
 
-<%= render "form", product: @product %>
+        <!-- Título -->
+        <h1 class="mb-6 text-2xl font-bold text-center text-gray-900">
+            <%= t('products.edit.title') %>
+        </h1>
 
-<%= link_to t('products.edit.back'), @product %>
+        <!-- Formulario -->
+        <%= form_with model: @product, local: true do |f| %>
+
+        <!-- Errores -->
+        <% if @product.errors.any? %>
+        <div class="mb-4 text-red-600 text-sm">
+            <h2 class="font-semibold">
+                <%= t('products.errors_title.other', count: @product.errors.count) %>
+            </h2>
+            <ul class="list-disc list-inside">
+                <% @product.errors.full_messages.each do |msg| %>
+                <li><%= msg %></li>
+                <% end %>
+            </ul>
+        </div>
+        <% end %>
+
+        <!-- Título -->
+        <div class="mb-4">
+            <%= f.label :title, t('products.form.title'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.text_field :title, required: true,
+                class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 truncate" %>
+        </div>
+
+        <!-- Descripción -->
+        <div class="mb-4">
+            <%= f.label :description, t('products.form.description'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.text_area :description, rows: 4,
+                class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200 max-h-52 overflow-auto" %>
+        </div>
+
+        <!-- Precio -->
+        <div class="mb-4">
+            <%= f.label :price, t('products.form.price'), class: "text-sm font-medium text-gray-700" %>
+            <%= f.number_field :price, step: 0.01,
+                class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
+        </div>
+
+        <!-- Foto con preview -->
+        <div class="mb-4">
+            <%= f.label :photo, t('products.form.photo'), class: "text-sm font-medium text-gray-700 block mb-2" %>
+            <div id="photo_box" class="w-full h-20 border-2 border-dashed border-green-500 rounded-lg px-3 py-2 flex items-center justify-center hover:bg-green-50 transition duration-200 relative text-center overflow-hidden">
+                <svg class="w-6 h-6 text-green-500 mr-2 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M7 16v4h10v-4M5 12l7-8 7 8M12 12v8"></path>
+                </svg>
+                <span id="photo_text" class="text-green-700 font-medium text-sm truncate">Selecciona una foto</span>
+                <%= f.file_field :photo, id: "product_photo_input", class: "absolute inset-0 w-full h-full opacity-0 cursor-pointer" %>
+                <!-- Preview dentro del mismo box -->
+                <div id="photo_preview" class="absolute inset-0 flex items-center justify-center pointer-events-none"></div>
+            </div>
+        </div>
+
+        <!-- Botones -->
+        <div class="flex justify-between items-center mb-4">
+            <!-- Guardar -->
+            <%= button_tag type: "submit",
+            class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 cursor-pointer" do %>
+                <span class="px-5 py-2.5 text-sm font-medium text-gray-900 bg-white rounded-md transition-all duration-200 ease-in group-hover:bg-transparent group-hover:text-white dark:bg-gray-900 dark:text-white">
+                <%= t('products.new.save') %>
+            </span>
+            <% end %>
+
+            <!-- Atrás -->
+            <%= link_to products_path, class: "px-4 py-2 text-sm font-medium border border-green-600 text-green-600 rounded-lg hover:bg-green-500 hover:text-white focus:ring-2 focus:ring-green-300 transition duration-200" do %>
+            <%= t('products.new.back') %>
+            <% end %>
+        </div>
+
+        <% end %>
+    </div>
+</div>
+
+<!-- Script de preview -->
+<script>
+    const input = document.getElementById('product_photo_input');
+    const text = document.getElementById('photo_text');
+    const preview = document.getElementById('photo_preview');
+
+    input.addEventListener('change', () => {
+        // Cambiar texto del nombre del archivo
+        if (input.files && input.files[0]) {
+            text.textContent = input.files[0].name;
+            // Mostrar preview
+            preview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = URL.createObjectURL(input.files[0]);
+            img.className = "max-h-40 rounded-lg";
+            preview.appendChild(img);
+        } else {
+            text.textContent = 'Selecciona una foto';
+            preview.innerHTML = '';
+        }
+    });
+</script>

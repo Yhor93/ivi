@@ -31,7 +31,7 @@ en:
       go_to_my_profile: "Go to my profile"
       view_more_products: "View more products from %{username}"
     new:
-      title: "Create Product"
+      title: "New Product"
       save: "Save"
       back: "Back to product list"
     edit:
@@ -72,7 +72,7 @@ en:
       title: "New Category"
     edit:
       title: "Edit Category"
-    category:
+    form:
       name: "Name"
     notices:
       created: "Category was successfully created."

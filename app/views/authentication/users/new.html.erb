@@ -7,7 +7,7 @@
 
     <!-- Card formulario -->
     <div class="relative my-4 p-8 rounded-2xl shadow-xl w-full max-w-md z-10">
-        <h1 class="mb-6 text-2xl font-bold text-center text-blue-900">
+        <h1 class="mb-6 text-2xl font-bold text-center text-gray-900">
             <%= t('authentication.users.new.title') %>
         </h1>
 
@@ -49,12 +49,13 @@
             <%= f.password_field :password_confirmation, required: true, class: "w-full border border-gray-300 rounded-lg px-3 py-2 focus:outline-none focus:ring-2 focus:ring-green-500 transition duration-200" %>
         </div>
 
-        <!-- Enlaces -->
+        <!-- Enlace -->
         <div class="flex justify-between items-center text-sm">
             <%= link_to t('authentication.users.new.already_have_account'), new_session_path, class: "text-green-600 my-4 hover:underline" %>
         </div>
-
+        <!-- Botones -->
         <div class="flex justify-between items-center mb-4">
+            <!-- Boton Crear Cuenta -->
             <div class="flex justify-center">
                 <%= button_tag type: "submit",
                     class: "relative inline-flex items-center justify-center p-0.5 rounded-lg bg-gradient-to-br from-green-500 to-green-700 group focus:outline-none focus:ring-2 focus:ring-green-300 dark:focus:ring-green-800 cursor-pointer" do %>
@@ -64,6 +65,7 @@
                 <% end %>
             </div>
 
+            <!-- boton Regresar -->
             <%= link_to products_path, class: "px-4 py-2 text-sm font-medium border border-green-600 text-green-600 rounded-lg hover:bg-green-500 hover:text-white  focus:ring-2 focus:ring-green-30 transition duration-200" do %>
             <%= t('authentication.users.new.back') %>
             <% end %>
