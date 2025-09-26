@@ -66,6 +66,6 @@ group :test do
   gem "selenium-webdriver"
 end
 
-gem "rubocop", "~> 1.79", require: false
+gem "rubocop", "~> 1.81", require: false
 
 gem "tailwindcss-rails", "~> 4.3"
